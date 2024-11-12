@@ -15,20 +15,20 @@ const Collection = () => {
   const [sortType, setSortType] = useState("relevant");
 
   // 主類別判斷函數
-  const toggleCategory = (e) => {
-    if (category.includes(e.target.value)) {
-      setCategory((prev) => prev.filter((item) => item !== e.target.value));
+  const toggleCategory = (event) => {
+    if (category.includes(event.target.value)) {
+      setCategory((prev) => prev.filter((item) => item !== event.target.value));
     } else {
-      setCategory((prev) => [...prev, e.target.value]);
+      setCategory((prev) => [...prev, event.target.value]);
     }
   };
 
   // 子類別判斷函數
-  const toggleSubCategory = (e) => {
-    if (subCategory.includes(e.target.value)) {
-      setSubCategory((prev) => prev.filter((item) => item !== e.target.value));
+  const toggleSubCategory = (event) => {
+    if (subCategory.includes(event.target.value)) {
+      setSubCategory((prev) => prev.filter((item) => item !== event.target.value));
     } else {
-      setSubCategory((prev) => [...prev, e.target.value]);
+      setSubCategory((prev) => [...prev, event.target.value]);
     }
   };
 
