@@ -5,7 +5,8 @@ import Title from "../components/Title";
 import ProductItem from "../components/ProductItem";
 
 const Collection = () => {
-  const { products } = useContext(ShopContext);
+  // 這裡取得共享的狀態, 以便即時更新並反應在在頁面上
+  const { products, search, showSearch } = useContext(ShopContext);
   // 顯示分類
   const [showFilter, setShowFilter] = useState(false);
   // 儲存商品變數
@@ -26,7 +27,9 @@ const Collection = () => {
   // 子類別判斷函數
   const toggleSubCategory = (event) => {
     if (subCategory.includes(event.target.value)) {
-      setSubCategory((prev) => prev.filter((item) => item !== event.target.value));
+      setSubCategory((prev) =>
+        prev.filter((item) => item !== event.target.value)
+      );
     } else {
       setSubCategory((prev) => [...prev, event.target.value]);
     }
@@ -37,8 +40,14 @@ const Collection = () => {
   const applyFilter = () => {
     let productsCopy = products.slice();
 
-    // filter 檢查所有商品並檢查商品類別是否存在類別陣列當中
+    // filter 檢查搜尋狀態, 並回傳相符的商品資料
+    if (showSearch && search) {
+      productsCopy = productsCopy.filter((item) =>
+        item.name.toLowerCase().includes(search.toLowerCase())
+      );
+    }
 
+    // filter 檢查所有商品並檢查商品類別是否存在類別陣列當中
     if (category.length > 0) {
       productsCopy = productsCopy.filter((item) =>
         category.includes(item.category)
@@ -76,7 +85,7 @@ const Collection = () => {
   // 當依賴數組變動時則重新渲染頁面
   useEffect(() => {
     applyFilter();
-  }, [category, subCategory]);
+  }, [category, subCategory, search, showSearch]);
 
   useEffect(() => {
     sortProduct();
