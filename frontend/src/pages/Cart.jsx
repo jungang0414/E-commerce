@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 import Title from "../components/Title";
 import { assets } from "../assets/assets";
+import CartTotal from "../components/CartTotal";
 
 const Cart = () => {
   // 取得共用數據
@@ -91,6 +92,12 @@ const Cart = () => {
             </div>
           );
         })}
+      </div>
+
+      <div className="flex justify-center my-20">
+        <div className="w-full sm:w-[450px]">
+          <CartTotal />
+        </div>
       </div>
     </div>
   );

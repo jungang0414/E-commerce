@@ -27,7 +27,7 @@ const ShopContextProvider = (props) => {
 
     // 將cartItems深拷貝, 創建完全獨立的副本
     // 這樣在修改cartDate的時候就不會影響到原始的cartItems
-    let cartDate = structuredClone(cartItems);
+    let cartDate = JSON.parse(JSON.stringify(cartItems));
 
     if (cartDate[itemId]) {
       if (cartDate[itemId][size]) {
@@ -62,15 +62,28 @@ const ShopContextProvider = (props) => {
 
   // 更新購物車數量
   const updateQuantity = async (itemId, size, quantity) => {
-
     // 深拷貝 cartItems 創建副本
-    let cartData = structuredClone(cartItems);
+    let cartData = JSON.parse(JSON.stringify(cartItems));
 
     // 利用物件的鍵值來更新對應的值
     cartData[itemId][size] = quantity;
 
-    // 更新 cartItems 
+    // 更新 cartItems
     setCartItems(cartData);
+  };
+
+  // 計算購物車內商品總額
+  const getCartAmount = () => {
+    let totalAmount = 0;
+    for (const items in cartItems) {
+      let itemInfo = products.find((product) => product._id === items);
+      for (const quantity in cartItems[items]) {
+        if (cartItems[items][quantity] > 0) {
+          totalAmount += itemInfo.price * cartItems[items][quantity];
+        }
+      }
+    }
+    return totalAmount;
   };
 
   const value = {
@@ -84,7 +97,8 @@ const ShopContextProvider = (props) => {
     cartItems,
     addToCart,
     getCartCount,
-    updateQuantity
+    updateQuantity,
+    getCartAmount,
   };
 
   return (
