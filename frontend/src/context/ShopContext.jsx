@@ -1,6 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import { products } from "../assets/assets";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 // 用於創建一個 Context 對象，
 // 這個對象可以在組件樹中傳遞數據，而不需要逐層傳遞 props
 export const ShopContext = createContext();
@@ -10,6 +12,8 @@ export const ShopContext = createContext();
 const ShopContextProvider = (props) => {
   const currency = "$";
   const delivery_fee = 10;
+  // 導航的共享狀態
+  const navigate = useNavigate();
   // 搜尋的共享狀態, 透過 value 傳遞給子組件
   const [search, setSearch] = useState("");
   const [showSearch, setShowSearch] = useState(false);
@@ -99,6 +103,7 @@ const ShopContextProvider = (props) => {
     getCartCount,
     updateQuantity,
     getCartAmount,
+    navigate,
   };
 
   return (
