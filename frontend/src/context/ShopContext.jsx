@@ -60,6 +60,19 @@ const ShopContextProvider = (props) => {
     }, 0);
   };
 
+  // 更新購物車數量
+  const updateQuantity = async (itemId, size, quantity) => {
+
+    // 深拷貝 cartItems 創建副本
+    let cartData = structuredClone(cartItems);
+
+    // 利用物件的鍵值來更新對應的值
+    cartData[itemId][size] = quantity;
+
+    // 更新 cartItems 
+    setCartItems(cartData);
+  };
+
   const value = {
     products,
     currency,
@@ -71,6 +84,7 @@ const ShopContextProvider = (props) => {
     cartItems,
     addToCart,
     getCartCount,
+    updateQuantity
   };
 
   return (
