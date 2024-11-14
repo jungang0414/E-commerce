@@ -42,21 +42,21 @@ const About = () => {
       </div>
 
       <div className="flex flex-col md:flex-row text-sm mb-20">
-        <div className="border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5">
+        <div className="border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5 hover:bg-black hover:text-white transition duration-500 ease-in">
           <b>Quality Assurance</b>
           <p className="text-gray-600">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati,
             sit.
           </p>
         </div>
-        <div className="border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5">
+        <div className="border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5 hover:bg-black hover:text-white transition duration-500">
           <b>Quality Assurance</b>
           <p className="text-gray-600">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati,
             sit.
           </p>
         </div>
-        <div className="border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5">
+        <div className="border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5 hover:bg-black hover:text-white transition duration-500">
           <b>Quality Assurance</b>
           <p className="text-gray-600">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati,

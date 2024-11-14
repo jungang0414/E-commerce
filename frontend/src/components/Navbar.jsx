@@ -1,6 +1,6 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { assets } from "../assets/assets";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 
 const Navbar = () => {
@@ -9,6 +9,18 @@ const Navbar = () => {
 
   // context showSearch 狀態傳遞
   const { setShowSearch, getCartCount } = useContext(ShopContext);
+
+  // 追蹤頁面路徑標示當前欄位選項
+  const location = useLocation();
+
+  // 避免向下滑動
+  useEffect(() => {
+    if (visible) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [visible]);
 
   return (
     <div className="flex items-center justify-between py-5 font-medium">
@@ -93,28 +105,36 @@ const Navbar = () => {
           </div>
           <NavLink
             onClick={() => setVisible(false)}
-            className="py-2 pl-6 border"
+            className={`py-2 pl-6 border ${
+              location.pathname === "/" ? "bg-black text-white" : ""
+            }`}
             to="/"
           >
             HOME
           </NavLink>
           <NavLink
             onClick={() => setVisible(false)}
-            className="py-2 pl-6 border"
+            className={`py-2 pl-6 border ${
+              location.pathname === "/collection" ? "bg-black text-white" : ""
+            }`}
             to="/collection"
           >
             COLLECTION
           </NavLink>
           <NavLink
             onClick={() => setVisible(false)}
-            className="py-2 pl-6 border"
+            className={`py-2 pl-6 border ${
+              location.pathname === "/about" ? "bg-black text-white" : ""
+            }`}
             to="/about"
           >
             ABOUT
           </NavLink>
           <NavLink
             onClick={() => setVisible(false)}
-            className="py-2 pl-6 border"
+            className={`py-2 pl-6 border ${
+              location.pathname === "/contact" ? "bg-black text-white" : ""
+            }`}
             to="/contact"
           >
             CONTACT
