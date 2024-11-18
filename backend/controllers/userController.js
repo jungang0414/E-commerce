@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 
 // 創建令牌
 const createToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SRCRET)
+    return jwt.sign({ id }, process.env.JWT_SECRET)
 }
 
 // 處理使用者登入請求
@@ -88,7 +88,24 @@ const registerUser = async (req, res) => {
 
 // 處理管理員登入請求
 const adminLogin = async (req, res) => {
+    try {
+        // 這裡從請求的 body 解構賦值出 email, password
+        const { email, password } = req.body
 
+        // 比較請求中的email, password 是否與環境變數中的管理員email, password相等
+        if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
+            // 若相同則使用 jwt 創建令牌
+            const token = jwt.sign(email + password, process.env.JWT_SECRET);
+            res.json({ succcess: true, token })
+        } else {
+            // 不相同則返回錯誤訊息
+            res.json({ success: false, message: "Invalid credentials" })
+        }
+
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message })
+    }
 }
 
 export { loginUser, registerUser, adminLogin }
