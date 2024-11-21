@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 // 後端API
 export const backendUrl = import.meta.env.VITE_BACKEND_URL;
+export const currency = "$";
 
 const App = () => {
   // 令牌狀態
