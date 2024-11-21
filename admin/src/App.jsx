@@ -34,15 +34,17 @@ const App = () => {
         <Login setToken={setToken} />
       ) : (
         <>
-          <Navbar />
+          {/* 將setToken函數傳遞 來重設 token 為空值使其登出 */}
+          <Navbar setToken={setToken} />
           <hr />
           <div className="flex w-full">
             <Sidebar />
             <div className="w-[70%] mx-auto ml-[max(5vw,25px)] my-8 text-gray-600 text-base">
               <Routes>
-                <Route path="/add" element={<Add />} />
-                <Route path="/list" element={<List />} />
-                <Route path="/orders" element={<Orders />} />
+                {/* 傳遞 token 來驗證管理員身分 */}
+                <Route path="/add" element={<Add token={token} />} />
+                <Route path="/list" element={<List token={token} />} />
+                <Route path="/orders" element={<Orders token={token} />} />
               </Routes>
             </div>
           </div>
